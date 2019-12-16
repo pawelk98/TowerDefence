@@ -148,6 +148,10 @@ public class mobStats : MonoBehaviour
                 gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
             }
         }
+        else  // Do ustawiania positionYCorrection
+        {
+            gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
+        }
         
 
 
