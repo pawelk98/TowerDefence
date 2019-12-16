@@ -118,14 +118,15 @@ MonoBehaviour:
     type: 3}
   healthBarOffset: {x: -0.4, y: 1.5}
   animator: {fileID: 3918462260472025855}
-  damage: 6
-  health: 30
-  speed: 2.66
+  damage: 10
+  health: 25
+  speed: 2
   mobState: 0
   mobFacingRight: 1
-  attackRange: 0.5
+  attackRange: 0.8
   freezeMob: 1
-  positionYCorrection: -0.6
+  positionYCorrection: -0.4
+  allyInFrontWalking: 0
   attackDuration: 0.25
   deathDuration: 1
   behindMobRange: 0
