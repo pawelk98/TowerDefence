@@ -43,6 +43,7 @@ public class mobStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         attackDurationCount = 0.0f;
         deathDurationCount = 0.0f;
         // if(mobFacingRight) destinationPositionX = 20;
@@ -86,7 +87,7 @@ public class mobStats : MonoBehaviour
         else
             healthBarScale = new Vector2(0, 1);
 
-        createdHealthBar.transform.localScale = healthBarScale;
+        createdHealthBar.transform.Find("Bar").localScale = healthBarScale;
     }
 
     // Update is called once per frame

@@ -19,11 +19,11 @@ public class castle : MonoBehaviour
         Vector2 healthBarScale;
 
         if (health > 0)
-            healthBarScale = new Vector2((health / maxHealth) * 2, 2);
+            healthBarScale = new Vector2(health / maxHealth, 1);
         else
             healthBarScale = new Vector2(0, 1);
 
-        healthBar.transform.localScale = healthBarScale;
+        healthBar.transform.Find("Bar").localScale = healthBarScale;
     }
 
     // Update is called once per frame
