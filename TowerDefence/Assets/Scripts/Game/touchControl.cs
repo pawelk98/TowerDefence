@@ -13,7 +13,8 @@ public class touchControl : MonoBehaviour
     Vector2 mousePos;
     int layerMask;
 
-    void Start() {
+    void Start()
+    {
         layerMask = LayerMask.GetMask("Roads");
     }
     void Update()
@@ -25,16 +26,17 @@ public class touchControl : MonoBehaviour
             if (isPicked == true)
             {
                 release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);
-                if (release.collider != null) {
+                if (release.collider != null)
+                {
                     // Debug.Log("Spawn mob on: " + release.collider.gameObject.name);
                     //TUTAJ SPAWNOWANKO MOBKA
-                    if(hit.collider.gameObject.GetComponent<cardStats>().manaCost <= GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana)
-                        // jesli jest wystarczajaca mana
+                    if (hit.collider.gameObject.GetComponent<cardStats>().manaCost <= GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana)
+                    // jesli jest wystarczajaca mana
                     {
                         // odejmujemy mane
                         GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana -= hit.collider.gameObject.GetComponent<cardStats>().manaCost;
                         // ustawiamy linie
-                        if(release.collider.name[4] == 'T')
+                        if (release.collider.name[4] == 'T')
                         {
                             mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.top;
                         }
@@ -48,7 +50,7 @@ public class touchControl : MonoBehaviour
                         }
 
                         // ustalamy strone
-                        if(hit.collider.transform.position.x < 0)
+                        if (hit.collider.transform.position.x < 0)
                         {
                             mobSpawner.GetComponent<mobSpawner>().side = global::mobSpawner.Side.left;
                         }
@@ -62,8 +64,6 @@ public class touchControl : MonoBehaviour
                         mobSpawner.GetComponent<mobSpawner>().spawnMob();
                         // niszczymy karte
                         Destroy(hit.collider.gameObject);
-
-
                     }
 
                 }
@@ -79,6 +79,15 @@ public class touchControl : MonoBehaviour
             {
                 originPos = hit.collider.transform.position;
                 isPicked = true;
+            }
+            else if (hit.collider != null && hit.collider.tag == "Reroll"
+            && GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana >= 5)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("ScriptsObject").GetComponent<cards>().cardsOnBoard[i]);
+                }
+                GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana -= 5;
             }
         }
 
