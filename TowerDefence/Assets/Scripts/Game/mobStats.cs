@@ -21,6 +21,7 @@ public class mobStats : MonoBehaviour
     public float positionYCorrection;
 
     [Header("Automatic")]
+    public bool allyInFrontWalking;
     public float attackDuration;
     public float deathDuration;
     public float behindMobRange;
@@ -130,20 +131,24 @@ public class mobStats : MonoBehaviour
         }
 
         //Chodzenie moba
-        if (mobFacingRight)
+        if(mobState == state.walk)
         {
-            positionX += 1 * speed * Time.deltaTime;
-            if (positionX > destinationPositionX) positionX = destinationPositionX;
+            if (mobFacingRight)
+            {
+                positionX += 1 * speed * Time.deltaTime;
+                if (positionX > destinationPositionX) positionX = destinationPositionX;
 
-            gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
-        }
-        else
-        {
-            positionX -= 1 * speed * Time.deltaTime;
-            if (positionX < destinationPositionX) positionX = destinationPositionX;
+                gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
+            }
+            else
+            {
+                positionX -= 1 * speed * Time.deltaTime;
+                if (positionX < destinationPositionX) positionX = destinationPositionX;
 
-            gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
+                gameObject.GetComponent<Transform>().position = new Vector3(positionX, realPositionY, 0.0f);
+            }
         }
+        
 
 
 
@@ -185,7 +190,7 @@ public class mobStats : MonoBehaviour
         {
             mobState = state.walk;
         }
-        else if (mobState == state.walk && destinationPositionX == positionX)
+        else if (mobState == state.walk && destinationPositionX == positionX && allyInFrontWalking == false)
         {
             mobState = state.stand;
         }
