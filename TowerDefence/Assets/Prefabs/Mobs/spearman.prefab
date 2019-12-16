@@ -114,6 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 6283721042348633810, guid: 7c0c56f17f4f1a9459ff0cb08cc5e982,
+    type: 3}
+  healthBarOffset: {x: -0.5, y: 2.2}
   animator: {fileID: 6798589465780576680}
   damage: 15
   health: 30

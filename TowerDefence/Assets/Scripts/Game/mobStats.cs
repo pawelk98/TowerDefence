@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class mobStats : MonoBehaviour
 {
+    public GameObject healthBar;
+    public Vector2 healthBarOffset;
     public enum state { stand, walk, attack, death };
-
 
     public Animator animator;
     public int damage;
-    public int health;
+    public float health;
     public float speed;
 
-    
     public state mobState;
     public bool mobFacingRight;
     public float attackRange;
@@ -32,6 +32,9 @@ public class mobStats : MonoBehaviour
     private float attackDurationCount = 0.0f;
     private float deathDurationCount = 0.0f;
 
+    private bool hasHealthBar = false;
+    private GameObject createdHealthBar;
+    private float maxHealth;
 
 
 
@@ -61,11 +64,36 @@ public class mobStats : MonoBehaviour
             }
         }
 
+        if (mobFacingRight)
+            createdHealthBar = Instantiate(healthBar, new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
+        else
+            createdHealthBar = Instantiate(healthBar, new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
+        maxHealth = health;
+    }
+
+
+    void setHealthBar()
+    {
+        if (mobFacingRight)
+            createdHealthBar.transform.position = new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y);
+        else
+            createdHealthBar.transform.position = new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y);
+
+        Vector2 healthBarScale;
+
+        if (health > 0)
+            healthBarScale = new Vector2(health / maxHealth, 1);
+        else
+            healthBarScale = new Vector2(0, 1);
+
+        createdHealthBar.transform.localScale = healthBarScale;
     }
 
     // Update is called once per frame
     void Update()
     {
+        setHealthBar();
+
         // Jesli mob ma sie ruszyć do tyłu to sie nie rusza
         if (mobFacingRight && destinationPositionX < positionX)
         {
@@ -82,7 +110,7 @@ public class mobStats : MonoBehaviour
             destinationPositionX = positionX;
         }
 
-        
+
 
         // Ustawia pozycje y o polowe wyzej niz wysokosc sprajta czyli na nogi
         realPositionY = positionY + (gameObject.GetComponent<Renderer>().bounds.size.y/* * gameObject.GetComponent<Transform>().localScale.y */) / 2 + positionYCorrection;
@@ -148,6 +176,7 @@ public class mobStats : MonoBehaviour
         {
             deathDurationCount = 0.0f;
             Destroy(this.gameObject);
+            Destroy(createdHealthBar);
         }
 
         // Jeśli mob nie jest na docelowej pozycji to zmieniamy animacje na chodzenie a jak jest to na stanie
@@ -161,7 +190,7 @@ public class mobStats : MonoBehaviour
         }
 
         // Jesli ma malo zycia to umiera
-        if(health <= 0)
+        if (health <= 0)
         {
             mobState = state.death;
         }

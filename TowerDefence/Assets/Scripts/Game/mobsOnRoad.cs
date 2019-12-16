@@ -37,13 +37,13 @@ public class mobsOnRoad : MonoBehaviour
 
     void destinationPositionCastle(List<GameObject> road, bool facingRight)
     {
-        for(int i = 0; i < road.Count; i++)
+        for (int i = 0; i < road.Count; i++)
         {
-            if(facingRight)
+            if (facingRight)
             {
                 road[i].GetComponent<mobStats>().destinationPositionX = rightMaxDestination - road[i].GetComponent<mobStats>().attackRange;
             }
-            else if(!facingRight)
+            else if (!facingRight)
             {
                 road[i].GetComponent<mobStats>().destinationPositionX = leftMaxDestination + road[i].GetComponent<mobStats>().attackRange;
             }
@@ -53,13 +53,13 @@ public class mobsOnRoad : MonoBehaviour
 
     void destinationPositionBehindAlly(List<GameObject> road, bool facingRight)
     {
-        for(int i = road.Count - 1; i > 0; i--)
+        for (int i = road.Count - 1; i > 0; i--)
         {
-            if(facingRight)
+            if (facingRight)
             {
                 road[i].GetComponent<mobStats>().destinationPositionX = road[i - 1].GetComponent<mobStats>().positionX - road[i].GetComponent<mobStats>().behindMobRange;
             }
-            else if(!facingRight)
+            else if (!facingRight)
             {
                 road[i].GetComponent<mobStats>().destinationPositionX = road[i - 1].GetComponent<mobStats>().positionX + road[i].GetComponent<mobStats>().behindMobRange;
             }
@@ -73,7 +73,7 @@ public class mobsOnRoad : MonoBehaviour
             roadLeft[0].GetComponent<mobStats>().destinationPositionX = roadRight[0].GetComponent<mobStats>().positionX - roadLeft[0].GetComponent<mobStats>().attackRange;
             roadRight[0].GetComponent<mobStats>().destinationPositionX = roadLeft[0].GetComponent<mobStats>().positionX + roadRight[0].GetComponent<mobStats>().attackRange;
         }
-            
+
     }
 
     bool isApproximately(float a, float b, float tolerance)
@@ -84,7 +84,7 @@ public class mobsOnRoad : MonoBehaviour
     void attack(List<GameObject> roadLeft, List<GameObject> roadRight)
     {
         // Bicie sie mobow
-        if(roadLeft.Count > 0 && roadRight.Count > 0)
+        if (roadLeft.Count > 0 && roadRight.Count > 0)
         {
             if (roadLeft[0].GetComponent<mobStats>().freezeMob == false
                         && roadLeft[0].GetComponent<mobStats>().destinationPositionX <= roadLeft[0].GetComponent<mobStats>().positionX + 0.001f
@@ -103,27 +103,27 @@ public class mobsOnRoad : MonoBehaviour
             }
         }
         // Bicie zamku
-        else if(roadLeft.Count > 0)
+        else if (roadLeft.Count > 0)
         {
             if (roadLeft[0].GetComponent<mobStats>().freezeMob == false
                         && roadLeft[0].GetComponent<mobStats>().destinationPositionX <= roadLeft[0].GetComponent<mobStats>().positionX + 0.001f
                         && roadLeft[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadLeft[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                castleRight.GetComponent<castle>().hp -= roadLeft[0].GetComponent<mobStats>().damage;
+                castleRight.GetComponent<castle>().health -= roadLeft[0].GetComponent<mobStats>().damage;
             }
         }
-        else if(roadRight.Count > 0)
+        else if (roadRight.Count > 0)
         {
             if (roadRight[0].GetComponent<mobStats>().freezeMob == false
                 && roadRight[0].GetComponent<mobStats>().destinationPositionX >= roadRight[0].GetComponent<mobStats>().positionX - 0.001f
                 && roadRight[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadRight[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                castleLeft.GetComponent<castle>().hp -= roadRight[0].GetComponent<mobStats>().damage;
+                castleLeft.GetComponent<castle>().health -= roadRight[0].GetComponent<mobStats>().damage;
             }
         }
-        
+
 
     }
 
@@ -144,7 +144,7 @@ public class mobsOnRoad : MonoBehaviour
         destinationPositionCastle(roadMidRight, false);
         destinationPositionCastle(roadBotLeft, true);
         destinationPositionCastle(roadBotRight, false);
-        
+
         destinationPositionBehindAlly(roadTopLeft, true);
         destinationPositionBehindAlly(roadTopRight, false);
         destinationPositionBehindAlly(roadMidLeft, true);
@@ -155,7 +155,7 @@ public class mobsOnRoad : MonoBehaviour
         destinationPositionEnemies(roadTopLeft, roadTopRight);
         destinationPositionEnemies(roadMidLeft, roadMidRight);
         destinationPositionEnemies(roadBotLeft, roadBotRight);
-       
+
         attack(roadTopLeft, roadTopRight);
         attack(roadMidLeft, roadMidRight);
         attack(roadBotLeft, roadBotRight);
