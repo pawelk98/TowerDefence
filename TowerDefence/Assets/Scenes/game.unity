@@ -602,11 +602,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPos:
-  - {x: -8.3, y: 2.22}
-  - {x: -6.52, y: 2.22}
-  - {x: -8.3, y: -0.07}
-  - {x: -6.52, y: -0.07}
-  cardScale: 0.25
+  - {x: -8.39, y: 2.12}
+  - {x: -6.44, y: 2.12}
+  - {x: -8.39, y: 0.02}
+  - {x: -6.44, y: 0.02}
+  cardScale: 0.28
   card:
   - {fileID: 5524449433138562352, guid: 38ea41c838fd242458ac29a4771e8d77, type: 3}
   - {fileID: 5788237310160695666, guid: 7ebdad63b45ec104baf1872f996071ca, type: 3}
@@ -1552,6 +1552,7 @@ GameObject:
   - component: {fileID: 1297477349}
   - component: {fileID: 1297477348}
   - component: {fileID: 1297477350}
+  - component: {fileID: 1297477351}
   m_Layer: 12
   m_Name: gameCastleLeft
   m_TagString: Castles
@@ -1648,6 +1649,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.65, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &1297477351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297477347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b010933ccd9d06449aa03b3735534ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1000
 --- !u!1 &1524311990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,6 +2180,7 @@ GameObject:
   - component: {fileID: 1989801348}
   - component: {fileID: 1989801347}
   - component: {fileID: 1989801349}
+  - component: {fileID: 1989801350}
   m_Layer: 11
   m_Name: gameCastleRight
   m_TagString: Castles
@@ -2262,6 +2277,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.65, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &1989801350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989801346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b010933ccd9d06449aa03b3735534ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1000
 --- !u!1 &2123819675
 GameObject:
   m_ObjectHideFlags: 0
