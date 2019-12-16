@@ -16,6 +16,7 @@ TagManager:
   - roadBot
   - gameBoard
   - Floor
+  - Reroll
   layers:
   - Default
   - TransparentFX
