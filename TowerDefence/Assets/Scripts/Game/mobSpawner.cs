@@ -7,6 +7,7 @@ public class mobSpawner : MonoBehaviour
     public enum Lane {top, mid, bot};
     public enum Side {right, left};
 
+
     public Lane lane;
     public Side side;
     public int mobID; 
@@ -48,7 +49,7 @@ public class mobSpawner : MonoBehaviour
 
             // Tworzenie moba
             GameObject createdMob = Instantiate(mobList[mobID]);
-
+            createdMob.GetComponent<Transform>().localScale += new Vector3(-1,-1,0);
 
             // Strona w jaka patrzy mob
             if (side == Side.left)

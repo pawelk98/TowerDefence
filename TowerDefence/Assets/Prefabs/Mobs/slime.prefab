@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 6283721042348633810, guid: 7c0c56f17f4f1a9459ff0cb08cc5e982,
     type: 3}
-  healthBarOffset: {x: 0, y: 1.5}
+  healthBarOffset: {x: 0, y: 1.2}
   animator: {fileID: 4713979016773023766}
   damage: 2
   health: 9
