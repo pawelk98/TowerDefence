@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Roads
+  - Castles
+  - Board
+  - ScriptsObject
+  - Card
+  - Road
+  - Mobs
+  - roadTop
+  - roadMid
+  - roadBot
+  - gameBoard
+  - Floor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Roads
+  - Mob
+  - Board
+  - Castle Right
+  - Castle Left
+  - Floor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1306654513
+    locked: 0
+  - name: OnBackground
+    uniqueID: 3048773401
+    locked: 0
+  - name: Mobs
+    uniqueID: 4278420815
+    locked: 0
+  - name: Castle
+    uniqueID: 2621824355
+    locked: 0
+  - name: MobAmunition
+    uniqueID: 424782905
+    locked: 0
+  - name: CardEffects
+    uniqueID: 2607973175
+    locked: 0
+  - name: UserInterface
+    uniqueID: 2566867669
+    locked: 0
+  - name: OnUserInterface
+    uniqueID: 368228227
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Roads
+    uniqueID: 3785734523
+    locked: 0
+  - name: Castles
+    uniqueID: 2173397739
+    locked: 0
+  - name: Board
+    uniqueID: 2717956215
+    locked: 0
+  - name: Cards
+    uniqueID: 3510104309
+    locked: 0
+  - name: Floor
+    uniqueID: 2146366285
+    locked: 0
