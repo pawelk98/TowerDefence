@@ -16,12 +16,12 @@ public class mobSpawner : MonoBehaviour
     public GameObject[] mobList;
 
 
-    private Vector3 startTopLeft = new Vector3(-4.21f, 1.22f, 0.0f);
-    private Vector3 startTopRight = new Vector3(9.0f, 1.22f, 0.0f);
-    private Vector3 startMidLeft = new Vector3(-4.21f, -1.3f, 0.0f);
-    private Vector3 startMidRight = new Vector3(9.0f, -1.3f, 0.0f);
-    private Vector3 startBotLeft = new Vector3(-4.21f, -3.75f, 0.0f);
-    private Vector3 startBotRight = new Vector3(9.0f, -3.75f, 0.0f);
+    private Vector3 startTopLeft = new Vector3(-3.48f, 1.22f, 0.0f);
+    private Vector3 startTopRight = new Vector3(7.97f, 1.22f, 0.0f);
+    private Vector3 startMidLeft = new Vector3(-3.48f, -1.3f, 0.0f);
+    private Vector3 startMidRight = new Vector3(7.97f, -1.3f, 0.0f);
+    private Vector3 startBotLeft = new Vector3(-3.48f, -3.75f, 0.0f);
+    private Vector3 startBotRight = new Vector3(7.97f, -3.75f, 0.0f);
     private Vector3 startHidden = new Vector3(-10.0f, 0.0f, 0.0f);
 
     // Start is called before the first frame update

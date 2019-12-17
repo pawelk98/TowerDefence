@@ -125,7 +125,8 @@ MonoBehaviour:
   mobFacingRight: 1
   attackRange: 0.8
   freezeMob: 1
-  positionYCorrection: -0.6
+  positionYCorrection: -0.4
+  allyInFrontWalking: 0
   attackDuration: 0.25
   deathDuration: 1
   behindMobRange: 0

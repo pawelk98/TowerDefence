@@ -35,6 +35,44 @@ public class mobsOnRoad : MonoBehaviour
         }
     }
 
+    void fixDistanceBehindCastle(List<GameObject> road)
+    {
+        for (int i = 0; i < road.Count; i++)
+        {
+            if (road[i].GetComponent<mobStats>().destinationPositionX < leftMaxDestination)
+            {
+                road[i].GetComponent<mobStats>().destinationPositionX = leftMaxDestination;
+            }
+            else if (road[i].GetComponent<mobStats>().destinationPositionX > rightMaxDestination)
+            {
+                road[i].GetComponent<mobStats>().destinationPositionX = rightMaxDestination;
+            }
+           
+        }
+    }
+
+    void dontBlockMovement(List<GameObject> road)
+    {
+        for (int i = 0; i < road.Count; i++)
+        {
+            if (i == 0)
+            {
+                road[0].GetComponent<mobStats>().allyInFrontWalking = false;
+            }
+            else
+            {
+                if (road[i - 1].GetComponent<mobStats>().mobState == mobStats.state.walk)
+                {
+                    road[i].GetComponent<mobStats>().allyInFrontWalking = true;
+                }
+                else
+                {
+                    road[i].GetComponent<mobStats>().allyInFrontWalking = false;
+                }
+            }
+        }
+    }
+
     void destinationPositionCastle(List<GameObject> road, bool facingRight)
     {
         for (int i = 0; i < road.Count; i++)
@@ -159,5 +197,24 @@ public class mobsOnRoad : MonoBehaviour
         attack(roadTopLeft, roadTopRight);
         attack(roadMidLeft, roadMidRight);
         attack(roadBotLeft, roadBotRight);
+
+        dontBlockMovement(roadTopLeft);
+        dontBlockMovement(roadTopRight);
+        dontBlockMovement(roadMidLeft);
+        dontBlockMovement(roadMidRight);
+        dontBlockMovement(roadBotLeft);
+        dontBlockMovement(roadBotRight);
+
+
+
+
+        //Uwaga: To powinno byc na koncu
+        fixDistanceBehindCastle(roadTopLeft);
+        fixDistanceBehindCastle(roadTopRight);
+        fixDistanceBehindCastle(roadMidLeft);
+        fixDistanceBehindCastle(roadMidRight);
+        fixDistanceBehindCastle(roadBotLeft);
+        fixDistanceBehindCastle(roadBotRight);
+        //Uwaga: Koniec
     }
 }
