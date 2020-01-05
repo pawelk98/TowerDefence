@@ -123,7 +123,7 @@ MonoBehaviour:
   speed: 3
   mobState: 0
   mobFacingRight: 1
-  attackRange: 4
+  attackRange: 5
   freezeMob: 1
   positionYCorrection: 0
   attackDuration: 0.25
