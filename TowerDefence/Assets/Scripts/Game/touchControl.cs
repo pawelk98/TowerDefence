@@ -6,6 +6,7 @@ public class touchControl : MonoBehaviour
 {
     public Collider2D[] clickableObj;
     public GameObject mobSpawner;
+    public GameObject gameBoard;
     bool isPicked = false;
     RaycastHit2D hit;
     RaycastHit2D release;
@@ -19,23 +20,27 @@ public class touchControl : MonoBehaviour
     }
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);     //odczytanie pozycji myszy
 
-        if (Input.GetMouseButtonUp(0))  //po wypuszczeniu przycisku
+        if (Input.GetMouseButtonUp(0))  //po wypuszczeniu przycisku / zakończeniu przeciągania
         {
             if (isPicked == true)
             {
-                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);
+                //sprawdzenie pozycji myszy przy wypuszczaniu przycisku
+                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);     
+
                 if (release.collider != null)
                 {
-                    // Debug.Log("Spawn mob on: " + release.collider.gameObject.name);
-                    //TUTAJ SPAWNOWANKO MOBKA
-                    if (hit.collider.gameObject.GetComponent<cardStats>().manaCost <= GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana)
-                    // jesli jest wystarczajaca mana
-                    {
-                        // odejmujemy mane
-                        GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana -= hit.collider.gameObject.GetComponent<cardStats>().manaCost;
-                        // ustawiamy linie
+                    //sprawdzenie czy wystarczy many
+                    if (hit.collider.gameObject.GetComponent<cardStats>().manaCost <= gameBoard.GetComponent<gameMana>().mana)  
+                                            {
+                        //zmniejszamy ilość many
+                        gameBoard.GetComponent<gameMana>().mana -= hit.collider.gameObject.GetComponent<cardStats>().manaCost;
+
+                        //sprawdzamy czy kartę wypuszczono na planszy
+                        if (hit.collider.transform)
+
+                        //sprawdzamy linię
                         if (release.collider.name[4] == 'T')
                         {
                             mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.top;
@@ -49,8 +54,8 @@ public class touchControl : MonoBehaviour
                             mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.bot;
                         }
 
-                        // ustalamy strone
-                        if (hit.collider.transform.position.x < 0)
+                        //sprawdzamy stronę
+                        if (mousePos.x < 2.225)
                         {
                             mobSpawner.GetComponent<mobSpawner>().side = global::mobSpawner.Side.left;
                         }
@@ -58,36 +63,41 @@ public class touchControl : MonoBehaviour
                         {
                             mobSpawner.GetComponent<mobSpawner>().side = global::mobSpawner.Side.right;
                         }
+
                         // ustalamy id moba
                         mobSpawner.GetComponent<mobSpawner>().mobID = hit.collider.gameObject.GetComponent<cardStats>().mobSpawnID;
+
                         // potwierdzamy
                         mobSpawner.GetComponent<mobSpawner>().spawnMob();
+
                         // niszczymy karte
                         Destroy(hit.collider.gameObject);
                     }
 
                 }
                 hit.transform.position = originPos; //jeżeli nie uzyta na linii wraca na swoje miejsce
-                isPicked = false;
+                isPicked = false;   //zakończono przeciąganie
             }
         }
 
         if (Input.GetMouseButtonDown(0))    //sprawdzenie pozycji kliknietego obiektu
         {
             hit = Physics2D.Raycast(mousePos, Vector2.zero);
-            if (hit.collider != null && hit.collider.tag == "Card")
+
+            if (hit.collider != null && hit.collider.tag == "Card")     //jeżeli kliknięto kartę
             {
                 originPos = hit.collider.transform.position;
-                isPicked = true;
+                isPicked = true;    //zaczęto przeciąganie
             }
-            else if (hit.collider != null && hit.collider.tag == "Reroll"
-            && GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana >= 5)
+
+            else if (hit.collider != null && hit.collider.tag == "Reroll"       //jeżeli klinknięto reroll
+            && gameBoard.GetComponent<gameMana>().mana >= gameBoard.GetComponent<gameMana>().rerollCost)
             {
                 for (int i = 0; i < 4; i++)
                 {
                     Destroy(GameObject.FindGameObjectWithTag("ScriptsObject").GetComponent<cards>().cardsOnBoard[i]);
                 }
-                GameObject.FindGameObjectWithTag("gameBoard").GetComponent<gameMana>().mana -= 5;
+                gameBoard.GetComponent<gameMana>().mana -= gameBoard.GetComponent<gameMana>().rerollCost;
             }
         }
 

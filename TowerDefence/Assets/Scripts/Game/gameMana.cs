@@ -4,13 +4,14 @@ using System.Collections;
 public class gameMana : MonoBehaviour {
 
 	public int mana;
+	public int rerollCost;
 	public float time;
 	// private bool isCoroutineExecuting = false;
 	public GameObject[] crystals = new GameObject[10];
 
+
 	// Use this for initialization
 	void Start () {
-		mana = 10;
 		// time = 3f; // ustawia sie w unity editor
 		for (int i = 0; i < 10; i++) {
 				crystals [i].SetActive (false);
