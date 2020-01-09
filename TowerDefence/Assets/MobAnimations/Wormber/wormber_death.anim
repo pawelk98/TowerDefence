@@ -26,15 +26,15 @@ AnimationClip:
     - time: 0.33333334
       value: {fileID: 21300000, guid: 476b8bef6796d2141b856a055af8e207, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: ca5f803b4dc67cc40b630ad51aacd336, type: 3}
+      value: {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - time: 0.6666667
       value: {fileID: 21300000, guid: 7bf15c55f4ee5f84182304c30ab52b5b, type: 3}
     - time: 0.8333333
       value: {fileID: 21300000, guid: dfe08adb8b0fa324eba242c25bf603f4, type: 3}
     - time: 1
-      value: {fileID: 21300000, guid: aadc0b871c0ec604b9adf3add5c7ba98, type: 3}
+      value: {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - time: 1.1666666
-      value: {fileID: 21300000, guid: a6a2af3f1dcc44c49839ea9a12a72ed0, type: 3}
+      value: {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - time: 1.3333334
       value: {fileID: 21300000, guid: 63eca0f23454e2148afe5541113e412d, type: 3}
     - time: 1.5
@@ -63,11 +63,11 @@ AnimationClip:
     - {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - {fileID: 21300000, guid: db24f8efc09525e49bdf30a26959847f, type: 3}
     - {fileID: 21300000, guid: 476b8bef6796d2141b856a055af8e207, type: 3}
-    - {fileID: 21300000, guid: ca5f803b4dc67cc40b630ad51aacd336, type: 3}
+    - {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - {fileID: 21300000, guid: 7bf15c55f4ee5f84182304c30ab52b5b, type: 3}
     - {fileID: 21300000, guid: dfe08adb8b0fa324eba242c25bf603f4, type: 3}
-    - {fileID: 21300000, guid: aadc0b871c0ec604b9adf3add5c7ba98, type: 3}
-    - {fileID: 21300000, guid: a6a2af3f1dcc44c49839ea9a12a72ed0, type: 3}
+    - {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
+    - {fileID: 21300000, guid: 6bfbf378758941c49b63b616e31a4d7a, type: 3}
     - {fileID: 21300000, guid: 63eca0f23454e2148afe5541113e412d, type: 3}
     - {fileID: 21300000, guid: a84b8d18d5099ea4f9ca81cc64723675, type: 3}
     - {fileID: 21300000, guid: 5b15766a8a9d335429b8853f50af2934, type: 3}
