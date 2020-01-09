@@ -770,6 +770,8 @@ MonoBehaviour:
   - {fileID: 8464390081065384276, guid: 53b6fa647229b1441a880844a4edf2b1, type: 3}
   - {fileID: 464016115163229150, guid: 5acde88ecf761db45bb12b248e17936a, type: 3}
   - {fileID: 7875980405187854090, guid: 710fc91bc7a80104395e7b47a4007f40, type: 3}
+  - {fileID: 1414841499206060941, guid: a9bfeab9baf31f6409c0439d8826c2c8, type: 3}
+  - {fileID: 1908764602437796492, guid: 86aaf3019aa7fec43a111ae8a8a5d26e, type: 3}
   cardsOnBoard:
   - {fileID: 0}
   - {fileID: 0}
