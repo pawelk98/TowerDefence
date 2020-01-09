@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mobsOnRoad : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     public List<GameObject> roadTopLeft = new List<GameObject>();
     public List<GameObject> roadMidLeft = new List<GameObject>();
     public List<GameObject> roadBotLeft = new List<GameObject>();
@@ -18,9 +18,37 @@ public class mobsOnRoad : MonoBehaviour
     private float leftMaxDestination = -3.48f;
     private float rightMaxDestination = 7.97f;
 
+    // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    IEnumerator delayDamage(GameObject target, GameObject attacker)
+    {
+        if(attacker != null)
+        {
+            int damage = attacker.GetComponent<mobStats>().damage;
+            float time = attacker.GetComponent<mobStats>().attackDuration;
+
+            yield return new WaitForSeconds(time);
+        
+            if(target != null)
+            target.GetComponent<mobStats>().health -= damage;
+        }
+    }
+
+    IEnumerator delayDamageCastle(GameObject target, GameObject attacker)
+    {
+        if(attacker != null)
+        {
+            int damage = attacker.GetComponent<mobStats>().damage;
+            float time = attacker.GetComponent<mobStats>().attackDuration;
+            yield return new WaitForSeconds(time);
+        
+            if(target != null)
+            target.GetComponent<castle>().health -= damage;
+        }
     }
 
     void deleteDead(List<GameObject> road)
@@ -130,6 +158,7 @@ public class mobsOnRoad : MonoBehaviour
             {
                 roadLeft[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
                 roadRight[0].GetComponent<mobStats>().health -= roadLeft[0].GetComponent<mobStats>().damage;
+                StartCoroutine(delayDamage(roadRight[0], roadLeft[0]));
             }
 
             if (roadRight[0].GetComponent<mobStats>().freezeMob == false
@@ -137,7 +166,7 @@ public class mobsOnRoad : MonoBehaviour
                 && roadRight[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadRight[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                roadLeft[0].GetComponent<mobStats>().health -= roadRight[0].GetComponent<mobStats>().damage;
+                StartCoroutine(delayDamage(roadLeft[0], roadRight[0]));
             }
         }
         // Bicie zamku
@@ -148,7 +177,7 @@ public class mobsOnRoad : MonoBehaviour
                         && roadLeft[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadLeft[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                castleRight.GetComponent<castle>().health -= roadLeft[0].GetComponent<mobStats>().damage;
+                StartCoroutine(delayDamageCastle(castleRight, roadLeft[0]));
             }
         }
         else if (roadRight.Count > 0)
@@ -158,11 +187,71 @@ public class mobsOnRoad : MonoBehaviour
                 && roadRight[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadRight[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                castleLeft.GetComponent<castle>().health -= roadRight[0].GetComponent<mobStats>().damage;
+                StartCoroutine(delayDamageCastle(castleLeft, roadRight[0]));
             }
         }
 
 
+    }
+
+    void attackBehindMob(List<GameObject> roadLeft, List<GameObject> roadRight)
+    {
+        // Z lewej strony bije moba
+        if (roadLeft.Count >= 2 && roadRight.Count >= 1)
+        {
+            for(int i = 1; i < roadLeft.Count; i++)
+            {
+                if(roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if(roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= roadRight[0].GetComponent<mobStats>().positionX &&
+                roadLeft[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
+                {
+                    roadLeft[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
+                    StartCoroutine(delayDamage(roadRight[0], roadLeft[i]));
+                }
+            }
+        }
+        // z lewej strony bije zamek
+        else if(roadLeft.Count >= 2 && roadRight.Count == 0)
+        {
+            for(int i = 1; i < roadLeft.Count; i++)
+            {
+                if(roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if(roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= rightMaxDestination &&
+                roadLeft[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
+                {
+                    roadLeft[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
+                    StartCoroutine(delayDamageCastle(castleRight, roadLeft[i]));
+                }
+            }
+        }
+        // Z prawej strony bije moba
+        if (roadRight.Count >= 2 && roadLeft.Count >= 1)
+        {
+            for(int i = 1; i < roadRight.Count; i++)
+            {
+                if(roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if(roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= roadLeft[0].GetComponent<mobStats>().positionX &&
+                roadRight[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
+                {
+                    roadRight[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
+                    StartCoroutine(delayDamage(roadLeft[0], roadRight[i]));
+                }
+            }
+        }
+        // z prawej strony bije zamek
+        else if(roadRight.Count >= 2 && roadLeft.Count == 0)
+        {
+            for(int i = 1; i < roadRight.Count; i++)
+            {
+                if(roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if(roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= leftMaxDestination &&
+                roadRight[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
+                {
+                    roadRight[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
+                    StartCoroutine(delayDamageCastle(castleLeft, roadRight[i]));
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -197,6 +286,10 @@ public class mobsOnRoad : MonoBehaviour
         attack(roadTopLeft, roadTopRight);
         attack(roadMidLeft, roadMidRight);
         attack(roadBotLeft, roadBotRight);
+
+        attackBehindMob(roadTopLeft, roadTopRight);
+        attackBehindMob(roadMidLeft, roadMidRight);
+        attackBehindMob(roadBotLeft, roadBotRight);
 
         dontBlockMovement(roadTopLeft);
         dontBlockMovement(roadTopRight);

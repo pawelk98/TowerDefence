@@ -17,6 +17,8 @@ public class mobStats : MonoBehaviour
     public bool mobFacingRight;
     public float attackRange;
     public bool freezeMob;
+    public bool flipFacing;
+    public bool killOnAttack;
 
     public float positionYCorrection;
 
@@ -66,7 +68,7 @@ public class mobStats : MonoBehaviour
             }
         }
 
-        if (mobFacingRight)
+        if (mobFacingRight ^ flipFacing)
             createdHealthBar = Instantiate(healthBar, new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
         else
             createdHealthBar = Instantiate(healthBar, new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
@@ -76,7 +78,7 @@ public class mobStats : MonoBehaviour
 
     void setHealthBar()
     {
-        if (mobFacingRight)
+        if (mobFacingRight ^ flipFacing)
             createdHealthBar.transform.position = new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y);
         else
             createdHealthBar.transform.position = new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y);
@@ -121,7 +123,7 @@ public class mobStats : MonoBehaviour
         behindMobRange = gameObject.GetComponent<Renderer>().bounds.size.x / 2;
 
         // Ustawiamy kierunek patrzenia sie moba
-        if (mobFacingRight)
+        if (mobFacingRight ^ flipFacing)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
@@ -165,6 +167,11 @@ public class mobStats : MonoBehaviour
 
 
         // Liczymy jak dlugo mob atakuje albo umiera
+        if(mobState == state.attack && killOnAttack)
+        {
+            mobState = state.death;
+        }
+
         if (mobState == state.attack)
         {
             attackDurationCount += Time.deltaTime;
