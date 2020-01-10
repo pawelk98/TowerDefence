@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class mobStats : MonoBehaviour
+public class mobStats : NetworkBehaviour
 {
-    public GameObject healthBar;
     public Vector2 healthBarOffset;
     public enum state { stand, walk, attack, death };
 
@@ -27,6 +25,8 @@ public class mobStats : MonoBehaviour
     public float attackDuration;
     public float deathDuration;
     public float behindMobRange;
+
+    [SyncVar]
     public float positionX;
     public float positionY;
     public float realPositionY;
@@ -35,18 +35,13 @@ public class mobStats : MonoBehaviour
     private float attackDurationCount = 0.0f;
     private float deathDurationCount = 0.0f;
 
-    private bool hasHealthBar = false;
     private GameObject createdHealthBar;
     private float maxHealth;
 
-
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        maxHealth = health;
+
         attackDurationCount = 0.0f;
         deathDurationCount = 0.0f;
         // if(mobFacingRight) destinationPositionX = 20;
@@ -68,13 +63,17 @@ public class mobStats : MonoBehaviour
             }
         }
 
-        if (mobFacingRight ^ flipFacing)
-            createdHealthBar = Instantiate(healthBar, new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
-        else
-            createdHealthBar = Instantiate(healthBar, new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
-        maxHealth = health;
+        // if (mobFacingRight ^ flipFacing)
+        //     createdHealthBar = Instantiate(healthBar, new Vector2(positionX + healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
+        // else
+        //     createdHealthBar = Instantiate(healthBar, new Vector2(positionX - healthBarOffset.x, positionY + healthBarOffset.y), Quaternion.identity);
+        // maxHealth = health;
     }
 
+    public void addHealthBar(GameObject newHealthBar)
+    {
+        createdHealthBar = newHealthBar;
+    }
 
     void setHealthBar()
     {
@@ -113,8 +112,6 @@ public class mobStats : MonoBehaviour
         {
             destinationPositionX = positionX;
         }
-
-
 
         // Ustawia pozycje y o polowe wyzej niz wysokosc sprajta czyli na nogi
         realPositionY = positionY + (gameObject.GetComponent<Renderer>().bounds.size.y/* * gameObject.GetComponent<Transform>().localScale.y */) / 2 + positionYCorrection;

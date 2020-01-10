@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mobsOnRoad : MonoBehaviour
 {
-    
+
     public List<GameObject> roadTopLeft = new List<GameObject>();
     public List<GameObject> roadMidLeft = new List<GameObject>();
     public List<GameObject> roadBotLeft = new List<GameObject>();
@@ -26,28 +26,28 @@ public class mobsOnRoad : MonoBehaviour
 
     IEnumerator delayDamage(GameObject target, GameObject attacker)
     {
-        if(attacker != null)
+        if (attacker != null)
         {
             int damage = attacker.GetComponent<mobStats>().damage;
             float time = attacker.GetComponent<mobStats>().attackDuration;
 
             yield return new WaitForSeconds(time);
-        
-            if(target != null)
-            target.GetComponent<mobStats>().health -= damage;
+
+            if (target != null)
+                target.GetComponent<mobStats>().health -= damage;
         }
     }
 
     IEnumerator delayDamageCastle(GameObject target, GameObject attacker)
     {
-        if(attacker != null)
+        if (attacker != null)
         {
             int damage = attacker.GetComponent<mobStats>().damage;
             float time = attacker.GetComponent<mobStats>().attackDuration;
             yield return new WaitForSeconds(time);
-        
-            if(target != null)
-            target.GetComponent<castle>().health -= damage;
+
+            if (target != null)
+                target.GetComponent<castle>().health -= damage;
         }
     }
 
@@ -75,7 +75,7 @@ public class mobsOnRoad : MonoBehaviour
             {
                 road[i].GetComponent<mobStats>().destinationPositionX = rightMaxDestination;
             }
-           
+
         }
     }
 
@@ -157,7 +157,6 @@ public class mobsOnRoad : MonoBehaviour
                         && roadLeft[0].GetComponent<mobStats>().mobState == mobStats.state.stand)
             {
                 roadLeft[0].GetComponent<mobStats>().mobState = mobStats.state.attack;
-                roadRight[0].GetComponent<mobStats>().health -= roadLeft[0].GetComponent<mobStats>().damage;
                 StartCoroutine(delayDamage(roadRight[0], roadLeft[0]));
             }
 
@@ -199,10 +198,10 @@ public class mobsOnRoad : MonoBehaviour
         // Z lewej strony bije moba
         if (roadLeft.Count >= 2 && roadRight.Count >= 1)
         {
-            for(int i = 1; i < roadLeft.Count; i++)
+            for (int i = 1; i < roadLeft.Count; i++)
             {
-                if(roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
-                if(roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= roadRight[0].GetComponent<mobStats>().positionX &&
+                if (roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if (roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= roadRight[0].GetComponent<mobStats>().positionX &&
                 roadLeft[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
                 {
                     roadLeft[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
@@ -211,12 +210,12 @@ public class mobsOnRoad : MonoBehaviour
             }
         }
         // z lewej strony bije zamek
-        else if(roadLeft.Count >= 2 && roadRight.Count == 0)
+        else if (roadLeft.Count >= 2 && roadRight.Count == 0)
         {
-            for(int i = 1; i < roadLeft.Count; i++)
+            for (int i = 1; i < roadLeft.Count; i++)
             {
-                if(roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
-                if(roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= rightMaxDestination &&
+                if (roadLeft[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if (roadLeft[i].GetComponent<mobStats>().positionX + roadLeft[i].GetComponent<mobStats>().attackRange >= rightMaxDestination &&
                 roadLeft[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
                 {
                     roadLeft[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
@@ -227,10 +226,10 @@ public class mobsOnRoad : MonoBehaviour
         // Z prawej strony bije moba
         if (roadRight.Count >= 2 && roadLeft.Count >= 1)
         {
-            for(int i = 1; i < roadRight.Count; i++)
+            for (int i = 1; i < roadRight.Count; i++)
             {
-                if(roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
-                if(roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= roadLeft[0].GetComponent<mobStats>().positionX &&
+                if (roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if (roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= roadLeft[0].GetComponent<mobStats>().positionX &&
                 roadRight[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
                 {
                     roadRight[i].GetComponent<mobStats>().mobState = mobStats.state.attack;
@@ -239,12 +238,12 @@ public class mobsOnRoad : MonoBehaviour
             }
         }
         // z prawej strony bije zamek
-        else if(roadRight.Count >= 2 && roadLeft.Count == 0)
+        else if (roadRight.Count >= 2 && roadLeft.Count == 0)
         {
-            for(int i = 1; i < roadRight.Count; i++)
+            for (int i = 1; i < roadRight.Count; i++)
             {
-                if(roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
-                if(roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= leftMaxDestination &&
+                if (roadRight[i].GetComponent<mobStats>().freezeMob == true) continue;
+                if (roadRight[i].GetComponent<mobStats>().positionX - roadRight[i].GetComponent<mobStats>().attackRange <= leftMaxDestination &&
                 roadRight[i].GetComponent<mobStats>().mobState == mobStats.state.stand)
                 {
                     roadRight[i].GetComponent<mobStats>().mobState = mobStats.state.attack;

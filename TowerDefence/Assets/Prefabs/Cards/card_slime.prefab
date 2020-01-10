@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 3
-  mobSpawnID: 0
+  mobSpawnID: 3
 --- !u!61 &-773838029082897893
 BoxCollider2D:
   m_ObjectHideFlags: 0

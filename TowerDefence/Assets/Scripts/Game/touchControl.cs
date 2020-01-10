@@ -1,109 +1,145 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class touchControl : MonoBehaviour
+public class touchControl : NetworkBehaviour
 {
-    public Collider2D[] clickableObj;
-    public GameObject mobSpawner;
-    public GameObject gameBoard;
-    bool isPicked = false;
-    RaycastHit2D hit;
-    RaycastHit2D release;
-    Vector2 originPos;
-    Vector2 mousePos;
+    GameObject mobSpawner;
+    GameObject gameBoard;
+    GameObject scriptsObject;
+    bool isPicked;
     int layerMask;
+    RaycastHit2D hit, release;
+    Vector2 mousePos, originPos;
+    playerScript.Side side;
+    playerScript.Lane lane;
+    int mobID;
+
 
     void Start()
     {
-        layerMask = LayerMask.GetMask("Roads");
-    }
-    void Update()
-    {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);     //odczytanie pozycji myszy
-
-        if (Input.GetMouseButtonUp(0))  //po wypuszczeniu przycisku / zakończeniu przeciągania
+        //sprawdzamy czy to odpowiedni gracz
+        if(!isLocalPlayer) 
         {
-            if (isPicked == true)
-            {
-                //sprawdzenie pozycji myszy przy wypuszczaniu przycisku
-                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);     
-
-                if (release.collider != null)
-                {
-                    //sprawdzenie czy wystarczy many
-                    if (hit.collider.gameObject.GetComponent<cardStats>().manaCost <= gameBoard.GetComponent<gameMana>().mana)  
-                                            {
-                        //zmniejszamy ilość many
-                        gameBoard.GetComponent<gameMana>().mana -= hit.collider.gameObject.GetComponent<cardStats>().manaCost;
-
-                        //sprawdzamy czy kartę wypuszczono na planszy
-                        if (hit.collider.transform)
-
-                        //sprawdzamy linię
-                        if (release.collider.name[4] == 'T')
-                        {
-                            mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.top;
-                        }
-                        else if (release.collider.name[4] == 'M')
-                        {
-                            mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.mid;
-                        }
-                        else if (release.collider.name[4] == 'B')
-                        {
-                            mobSpawner.GetComponent<mobSpawner>().lane = global::mobSpawner.Lane.bot;
-                        }
-
-                        //sprawdzamy stronę
-                        if (mousePos.x < 2.225)
-                        {
-                            mobSpawner.GetComponent<mobSpawner>().side = global::mobSpawner.Side.left;
-                        }
-                        else
-                        {
-                            mobSpawner.GetComponent<mobSpawner>().side = global::mobSpawner.Side.right;
-                        }
-
-                        // ustalamy id moba
-                        mobSpawner.GetComponent<mobSpawner>().mobID = hit.collider.gameObject.GetComponent<cardStats>().mobSpawnID;
-
-                        // potwierdzamy
-                        mobSpawner.GetComponent<mobSpawner>().spawnMob();
-
-                        // niszczymy karte
-                        Destroy(hit.collider.gameObject);
-                    }
-
-                }
-                hit.transform.position = originPos; //jeżeli nie uzyta na linii wraca na swoje miejsce
-                isPicked = false;   //zakończono przeciąganie
-            }
+            return;
         }
 
-        if (Input.GetMouseButtonDown(0))    //sprawdzenie pozycji kliknietego obiektu
+        isPicked = false;
+
+        layerMask = LayerMask.GetMask("Roads");
+
+        gameBoard = GameObject.Find("GameBoard");
+        scriptsObject = GameObject.Find("ScriptObject");
+    }
+
+
+    void Update()
+    {
+        //sprawdzamy czy to odpowiedni gracz
+        if(!isLocalPlayer) 
         {
+            return;
+        }
+
+
+        //odczytuję pozycję myszy
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+        //wciśnięto przycisk myszy
+        if (Input.GetMouseButtonDown(0))
+        {
+            //sprawdzenie na co kliknięto
             hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.tag == "Card")     //jeżeli kliknięto kartę
+            //jeżeli kliknięto na kartę
+            //zapamiętanie początkowej pozycji (do cofnięcia po nieudanym przeciąganiu)
+            //ustawienie flagi, że zaczęto przeciąganie
+            if (hit.collider != null && hit.collider.tag == "Card")
             {
                 originPos = hit.collider.transform.position;
-                isPicked = true;    //zaczęto przeciąganie
+                isPicked = true;
             }
-
-            else if (hit.collider != null && hit.collider.tag == "Reroll"       //jeżeli klinknięto reroll
-            && gameBoard.GetComponent<gameMana>().mana >= gameBoard.GetComponent<gameMana>().rerollCost)
+            //jeżeli kliknięto na reroll oraz wystarczy many na jego użycie
+            //usuwamy karty ze stołu i zmniejszamy ilość many
+            else if (hit.collider != null && hit.collider.tag == "Reroll" &&
+            gameBoard.GetComponent<gameMana>().mana >= gameBoard.GetComponent<gameMana>().rerollCost)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    Destroy(GameObject.FindGameObjectWithTag("ScriptsObject").GetComponent<cards>().cardsOnBoard[i]);
+                    Destroy(scriptsObject.GetComponent<cards>().cardsOnBoard[i]);
                 }
+
                 gameBoard.GetComponent<gameMana>().mana -= gameBoard.GetComponent<gameMana>().rerollCost;
             }
         }
 
-        if (isPicked == true)   //jeżeli obiekt został kliknięty
+
+        //trwa przeciąganie, więc przesuwamy przeciągany obiekt do pozycji myszy
+        if (isPicked == true)
         {
             hit.collider.transform.position = mousePos;
+        }
+
+
+        //zwolniono przycisk myszy
+        if (Input.GetMouseButtonUp(0))
+        {
+            //jeżeli przeciągano kartę
+            if (isPicked == true)
+            {
+                //sprawdzenie na co została upuszczona
+                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);
+
+                if (release.collider != null)
+                {
+                    //sprawdzenie czy wystarczy many na użycie karty
+                    //zmniejszamy ilość many
+                    if (hit.collider.gameObject.GetComponent<cardStats>().manaCost <= gameBoard.GetComponent<gameMana>().mana)
+                    {
+                        gameBoard.GetComponent<gameMana>().mana -= hit.collider.gameObject.GetComponent<cardStats>().manaCost;
+
+                        //sprawdzamy czy kartę wypuszczono na którejś linii
+                        switch (release.collider.name[4])
+                        {
+                            case 'T':
+                                lane = playerScript.Lane.top;
+                                break;
+
+                            case 'M':
+                                lane = playerScript.Lane.mid;
+                                break;
+
+                            case 'B':
+                                lane = playerScript.Lane.bot;
+                                break;
+                        }
+
+                        //bierzemy id moba który zostanie zespawnowany z karty
+                        //spawnujemy i niszczymy kartę
+                        mobID = hit.collider.gameObject.GetComponent<cardStats>().mobSpawnID;
+                        side = GetComponent<playerScript>().playerSide;                        
+
+                        //spawnujemy moba
+                        GetComponent<spawner>().CmdSpawnMob(side, lane, mobID);
+
+                        Destroy(hit.collider.gameObject);
+                    }
+                    //jeżeli za mało many, karta wraca na swoje miejsce
+                    else
+                    {
+                        hit.transform.position = originPos;
+                    }
+
+                }
+                //jeżeli karta nie została upuszczona na linię wraca na swoje miejsce
+                else
+                {
+                    hit.transform.position = originPos;
+                }
+                
+                //zakończono przeciąganie
+                isPicked = false;
+            }
         }
     }
 }
