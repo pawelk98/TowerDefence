@@ -901,7 +901,7 @@ MonoBehaviour:
   - {x: -6.15, y: 1.65}
   - {x: -8.41, y: -3.6}
   - {x: -6.15, y: -3.6}
-  cardScale: 0.4
+  cardScale: 0.43
   card:
   - {fileID: 5524449433138562352, guid: 38ea41c838fd242458ac29a4771e8d77, type: 3}
   - {fileID: 5788237310160695666, guid: 7ebdad63b45ec104baf1872f996071ca, type: 3}
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mana: 5
-  rerollCost: 2
+  rerollCost: 1
   time: 3
   crystals:
   - {fileID: 411401710}
@@ -2112,7 +2112,7 @@ GameObject:
   - component: {fileID: 1432887568}
   - component: {fileID: 1432887567}
   - component: {fileID: 1432887569}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RerollButton
   m_TagString: Reroll
   m_Icon: {fileID: 0}
@@ -2176,7 +2176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432887566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.059999943, y: -1.095, z: 0}
+  m_LocalPosition: {x: -0.059999943, y: -1.095, z: 1}
   m_LocalScale: {x: 1.052505, y: 1.052505, z: 10.52505}
   m_Children: []
   m_Father: {fileID: 980633470}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1784448629240420415}
   - component: {fileID: 2534575526915435542}
   - component: {fileID: 5701904303161823028}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: card_blademaster
   m_TagString: Card
   m_Icon: {fileID: 0}

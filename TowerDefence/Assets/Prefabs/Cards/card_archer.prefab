@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7855072573386354640}
   - component: {fileID: -28303472379659416}
   - component: {fileID: 5224253930131368399}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: card_archer
   m_TagString: Card
   m_Icon: {fileID: 0}

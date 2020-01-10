@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5548207103716464485}
   - component: {fileID: 4072303668525065344}
   - component: {fileID: 4004307228923360408}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: card_shieldman
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9898ceefb0e3b84d9acbc64322614ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 2
+  manaCost: 5
   mobSpawnID: 2
 --- !u!61 &4004307228923360408
 BoxCollider2D:

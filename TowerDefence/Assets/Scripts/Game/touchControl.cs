@@ -7,7 +7,7 @@ public class touchControl : NetworkBehaviour
     GameObject gameBoard;
     GameObject scriptsObject;
     bool isPicked;
-    int layerMask;
+    int layerMaskRoads, layerMaskCards;
     RaycastHit2D hit, release;
     Vector2 mousePos, originPos;
     playerScript.Side side;
@@ -25,7 +25,8 @@ public class touchControl : NetworkBehaviour
 
         isPicked = false;
 
-        layerMask = LayerMask.GetMask("Roads");
+        layerMaskRoads = LayerMask.GetMask("Roads");
+        layerMaskCards = LayerMask.GetMask("Cards");
 
         gameBoard = GameObject.Find("GameBoard");
         scriptsObject = GameObject.Find("ScriptObject");
@@ -49,11 +50,12 @@ public class touchControl : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //sprawdzenie na co kliknięto
-            hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            hit = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMaskCards);
 
             //jeżeli kliknięto na kartę
             //zapamiętanie początkowej pozycji (do cofnięcia po nieudanym przeciąganiu)
             //ustawienie flagi, że zaczęto przeciąganie
+
             if (hit.collider != null && hit.collider.tag == "Card")
             {
                 originPos = hit.collider.transform.position;
@@ -88,7 +90,7 @@ public class touchControl : NetworkBehaviour
             if (isPicked == true)
             {
                 //sprawdzenie na co została upuszczona
-                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMask);
+                release = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMaskRoads);
 
                 if (release.collider != null)
                 {

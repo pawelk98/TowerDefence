@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2008719818634635418}
   - component: {fileID: 1609195001831909182}
   - component: {fileID: 587103348349142516}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Card_wormber
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9898ceefb0e3b84d9acbc64322614ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 4
+  manaCost: 6
   mobSpawnID: 6
 --- !u!61 &587103348349142516
 BoxCollider2D:
