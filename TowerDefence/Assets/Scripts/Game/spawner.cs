@@ -39,8 +39,10 @@ public class spawner : NetworkBehaviour
     [ClientRpc]
     void RpcSetSpawnedMob(playerScript.Side side, playerScript.Lane lane, GameObject spawnedMob, GameObject spawnedMobHealthBar)
     {
+        //dodajemy pasek hp do moba
         spawnedMob.GetComponent<mobStats>().addHealthBar(spawnedMobHealthBar);
 
+        //skalujemy utworzonego moba
         spawnedMob.GetComponent<Transform>().localScale += new Vector3(-1, -1, 0);
 
         //ustawiamy stronę, w którą patrzy mob
