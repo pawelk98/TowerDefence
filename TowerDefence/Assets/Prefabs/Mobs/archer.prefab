@@ -115,13 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 225674892816773728, guid: 90e7d22973bf9b24c92fc2ed47bc453b,
-    type: 3}
   healthBarOffset: {x: -0.2, y: 1.5}
   animator: {fileID: 8385051892845068794}
-  damage: 7
-  health: 15
-  speed: 3
+  damage: 20
+  health: 30
+  speed: 2.5
   mobState: 0
   mobFacingRight: 1
   attackRange: 5

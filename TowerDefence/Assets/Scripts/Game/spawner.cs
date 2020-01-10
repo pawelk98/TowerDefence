@@ -28,8 +28,8 @@ public class spawner : NetworkBehaviour
     [Command]
     public void CmdSpawnMob(playerScript.Side side, playerScript.Lane lane, int mobId)
     {
-        GameObject spawnedMob = Instantiate(mobList[mobId]);
-        GameObject spawnedMobHealthBar = Instantiate(healthBar);
+        GameObject spawnedMob = Instantiate(mobList[mobId], startHidden, Quaternion.identity);
+        GameObject spawnedMobHealthBar = Instantiate(healthBar, startHidden, Quaternion.identity);
         NetworkServer.Spawn(spawnedMob);
         NetworkServer.Spawn(spawnedMobHealthBar);
 

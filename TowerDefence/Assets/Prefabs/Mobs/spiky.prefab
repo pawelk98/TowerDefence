@@ -115,12 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 225674892816773728, guid: 90e7d22973bf9b24c92fc2ed47bc453b,
-    type: 3}
   healthBarOffset: {x: 0, y: 1.37}
   animator: {fileID: 5562009036677342567}
-  damage: 7
-  health: 200
+  damage: 10
+  health: 400
   speed: 4
   mobState: 0
   mobFacingRight: 0

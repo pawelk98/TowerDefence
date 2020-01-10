@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2012015481924422008}
   - component: {fileID: -699180250647428830}
   - component: {fileID: -1637036554474439722}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Card_spiky
   m_TagString: Card
   m_Icon: {fileID: 0}

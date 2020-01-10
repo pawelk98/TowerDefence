@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8274207717416224171}
   - component: {fileID: 5045041608476319830}
   - component: {fileID: -8537633332857250287}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: card_spearman
   m_TagString: Card
   m_Icon: {fileID: 0}
