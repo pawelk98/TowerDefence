@@ -20,6 +20,9 @@ public class mobStats : NetworkBehaviour
 
     public float positionYCorrection;
 
+    [Header("Automatic if == 0")]
+    public float fixedBehindMobRange;
+
     [Header("Automatic")]
     public bool allyInFrontWalking;
     public float attackDuration;
@@ -117,7 +120,15 @@ public class mobStats : NetworkBehaviour
         realPositionY = positionY + (gameObject.GetComponent<Renderer>().bounds.size.y/* * gameObject.GetComponent<Transform>().localScale.y */) / 2 + positionYCorrection;
 
         // Ustawia odleglosc stania za sojusznikiem
-        behindMobRange = gameObject.GetComponent<Renderer>().bounds.size.x / 2;
+        if(fixedBehindMobRange == 0.0f)
+        {
+            behindMobRange = gameObject.GetComponent<Renderer>().bounds.size.x / 2;
+        }
+        else
+        {
+            behindMobRange = fixedBehindMobRange;
+        }
+        
 
         // Ustawiamy kierunek patrzenia sie moba
         if (mobFacingRight ^ flipFacing)

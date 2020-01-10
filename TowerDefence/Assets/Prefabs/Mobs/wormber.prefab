@@ -114,8 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 225674892816773728, guid: 90e7d22973bf9b24c92fc2ed47bc453b,
-    type: 3}
   healthBarOffset: {x: 0, y: 1.26}
   animator: {fileID: 5686216511302551419}
   damage: 200
@@ -128,6 +126,7 @@ MonoBehaviour:
   flipFacing: 1
   killOnAttack: 1
   positionYCorrection: 0
+  fixedBehindMobRange: 1
   allyInFrontWalking: 0
   attackDuration: 0
   deathDuration: 0
