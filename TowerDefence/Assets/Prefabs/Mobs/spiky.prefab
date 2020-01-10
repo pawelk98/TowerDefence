@@ -115,16 +115,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarOffset: {x: 0, y: 1.37}
+  healthBarOffset: {x: 0, y: 1}
   animator: {fileID: 5562009036677342567}
-  damage: 10
+  damage: 3
   health: 400
   speed: 4
   mobState: 0
   mobFacingRight: 0
   attackRange: 1.25
   freezeMob: 1
-  flipFacing: 1
+  flipFacing: 0
   killOnAttack: 0
   positionYCorrection: 0
   fixedBehindMobRange: 1
