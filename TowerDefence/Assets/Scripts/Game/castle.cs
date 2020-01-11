@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class castle : MonoBehaviour
+public class castle : NetworkBehaviour
 {
     public GameObject healthBar;
+    [SyncVar]
     public float health = 1000;
     private float maxHealth;
 
