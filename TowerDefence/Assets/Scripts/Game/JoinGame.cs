@@ -85,5 +85,24 @@ public class JoinGame : MonoBehaviour
         ClearRoomList();
         status.text = "Joining...";
     }
+
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 1)
+        {
+            StartCoroutine(SetupLobbySceneButtons());
+        }
+
+    }
+
+
+
+    public IEnumerator SetupLobbySceneButtons()
+    {
+
+        yield return new WaitForSeconds(0.3f);
+        GameObject.Find("RefreshButton").GetComponent<Button>().onClick.AddListener(RefreshRoomList);
+    }
 }
 

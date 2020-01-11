@@ -48,39 +48,24 @@ public class GameManager : NetworkManager
     }
 
  
-    /*private void OnLevelWasLoaded(int level)
+    private void OnLevelWasLoaded(int level)
     {
         if(level == 1)
         {
             StartCoroutine(SetupLobbySceneButtons());
         }
-        else if(level ==2)
-        {
-            SetupOtherSceneButtons();
-        }
+      
     }
 
-    void SetupOtherSceneButtons()
-    {
-
-        GameObject.Find("DcButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("DcButton").GetComponent<Button>().onClick.AddListener(singleton.StopHost);
-
-    }
+   
 
     public IEnumerator SetupLobbySceneButtons()
     {
-        yield return new WaitForSeconds(0.3f);
-        GameObject.Find("HostButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("HostButton").GetComponent<Button>().onClick.AddListener(HostGameButton);
-
-      
-        GameObject.Find("ConnectToGameButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("ConnectToGameButton").GetComponent<Button>().onClick.AddListener(JoinGame);
-       
-      
+        
+           yield return new WaitForSeconds(0.3f);
         GameObject.Find("BackToMainMenuButton").GetComponent<Button>().onClick.AddListener(GoBackToMainMenuButton);
+        GameObject.Find("CreateRoom").GetComponent<Button>().onClick.AddListener(CreateRoom);
     }
-   */
+   
 
 }
