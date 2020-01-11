@@ -30,11 +30,5 @@ public class castle : MonoBehaviour
     void Update()
     {
         setHealthBar();
-
-        //tu wygrana bedzie
-        if(health <= 0)
-        {
-            
-        }
     }
 }
