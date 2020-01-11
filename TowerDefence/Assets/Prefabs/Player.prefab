@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01349c56f7f88c64c904edc58e8506cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  win: {fileID: 3000176200587840125, guid: a19345695f54ced41824627babe5761d, type: 3}
+  lose: {fileID: 3605029955016031209, guid: 4652a62fc35f96e478a743057bf5000a, type: 3}
   playerSide: 0
 --- !u!114 &5366059397315912837
 MonoBehaviour:

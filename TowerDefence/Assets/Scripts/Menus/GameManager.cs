@@ -3,104 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
+using UnityEngine.Networking.Types;
 using UnityEngine.UI;
 using System;
 
 public class GameManager : NetworkManager
 {
-   
+
+    [SerializeField]
+    private uint roomSize = 4;
     //Rzeczy do LobbyMenu
-
+    private NetworkManager manager;
+    private string roomname;
+    
     public static GameManager Instance { set; get; }
-
+ 
     private void Start()
     {
-
+        manager = NetworkManager.singleton;
+        if (manager.matchMaker == null)
+        {
+            manager.StartMatchMaker();
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    public void HostGameButton()
-    {
-        StartupHost();
-    }
 
     public void GoBackToMainMenuButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
-
-    //NetworkManager 
-
-
-    public void StartupHost()
+    
+    public void CreateRoom()
     {
-        NetworkServer.Reset();
-        SetPort();
-        singleton.StartHost();
-        
+        roomname = GameObject.Find("RoomNameInput").transform.Find("Text").GetComponent<Text>().text;
+        if (roomname != "" && roomname != null)
+        {
+        Debug.Log("Creating room: " + roomname + " with room for " + roomSize + "players.");
+            manager.matchMaker.CreateMatch(roomname,roomSize,true, "", "", "",0,0,manager.OnMatchCreate);
+        }
+
     }
 
-    public void JoinGame()
-    {
-        SetIpAddress();
-        SetPort();
-        singleton.StartClient();
-    }
-
-    private void SetIpAddress()
-    {
-        string IpAddress = GameObject.Find("HostInput").transform.Find("Text").GetComponent<Text>().text;
-       singleton.networkAddress = IpAddress;
-    }
-
-    public void SetPort()
-    {
-        singleton.networkPort= 7777;
-    }
+ 
     private void OnLevelWasLoaded(int level)
     {
         if(level == 1)
         {
             StartCoroutine(SetupLobbySceneButtons());
         }
-        else if(level ==2)
-        {
-            SetupOtherSceneButtons();
-        }
+      
     }
 
-    void SetupOtherSceneButtons()
-    {
-
-        GameObject.Find("DcButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("DcButton").GetComponent<Button>().onClick.AddListener(singleton.StopHost);
-
-    }
+   
 
     public IEnumerator SetupLobbySceneButtons()
     {
-        yield return new WaitForSeconds(0.3f);
-        GameObject.Find("HostButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("HostButton").GetComponent<Button>().onClick.AddListener(HostGameButton);
-
-      
-        GameObject.Find("ConnectToGameButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("ConnectToGameButton").GetComponent<Button>().onClick.AddListener(JoinGame);
-       
-      
+        
+           yield return new WaitForSeconds(0.3f);
         GameObject.Find("BackToMainMenuButton").GetComponent<Button>().onClick.AddListener(GoBackToMainMenuButton);
-       
-    }
-    public override void OnClientConnect(NetworkConnection conn)
-    {
-        base.OnClientConnect(conn);
-        Debug.Log("Succesfully Conected to the server");
-    }
-    public override void OnServerConnect(NetworkConnection conn)
-    {
-      
-        Debug.Log("A client connected to the server: " + conn);
+        GameObject.Find("CreateRoom").GetComponent<Button>().onClick.AddListener(CreateRoom);
     }
    
 

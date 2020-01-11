@@ -6,6 +6,9 @@ public class playerScript : NetworkBehaviour
     public enum Side { left, right };
     public enum Lane { top, mid, bot }
 
+    GameObject win;
+    GameObject lose;
+
     [SyncVar]
     public Side playerSide;
 
@@ -19,6 +22,12 @@ public class playerScript : NetworkBehaviour
         {
             leftCastle = GameObject.Find("GameCastleLeft");
             rightCastle = GameObject.Find("GameCastleRight");
+
+            win = GameObject.Find("Wygrana");
+            lose = GameObject.Find("Przegrana");
+
+            win.SetActive(false);
+            lose.SetActive(false);
 
             playerSide = Side.right;
 
@@ -39,22 +48,28 @@ public class playerScript : NetworkBehaviour
             {
                 if (playerSide == Side.left)
                 {
-                    //EKRAN PRZEGRANEJ
+                 
+                    lose.SetActive(true);
+                  
                 }
                 else
                 {
-                    //EKRAN WYGRANEJ
+                    win.SetActive(true);
+                    
                 }
             }
             else if (rightCastle.GetComponent<castle>().health <= 0)
             {
-                if (playerSide == Side.right)
+                if (playerSide == Side.left)
                 {
-                    //EKRAN WYGRANEJ
+                    win.SetActive(true);
+                    
                 }
                 else
                 {
-                    //EKRAN PRZEGRANEJ
+                    lose.SetActive(true);
+                   
+
                 }
             }
         }
