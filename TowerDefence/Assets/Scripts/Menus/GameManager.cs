@@ -12,7 +12,9 @@ public class GameManager : NetworkManager
 {
 
     [SerializeField]
-    private uint roomSize = 4;
+    private uint roomSize = 2;
+    private int connectionCounter;
+    public static bool isConnected = false;
     //Rzeczy do LobbyMenu
     private NetworkManager manager;
     private string roomname;
@@ -21,6 +23,8 @@ public class GameManager : NetworkManager
  
     private void Start()
     {
+        isConnected = false;
+        connectionCounter = 0;
         manager = NetworkManager.singleton;
         if (manager.matchMaker == null)
         {
@@ -45,9 +49,9 @@ public class GameManager : NetworkManager
             manager.matchMaker.CreateMatch(roomname,roomSize,true, "", "", "",0,0,manager.OnMatchCreate);
         }
 
+        
     }
 
- 
     private void OnLevelWasLoaded(int level)
     {
         if(level == 1)
@@ -67,5 +71,19 @@ public class GameManager : NetworkManager
         GameObject.Find("CreateRoom").GetComponent<Button>().onClick.AddListener(CreateRoom);
     }
    
+    public void GoToGame()
+    {
+        manager.ServerChangeScene("game");
+    }
 
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        base.OnServerConnect(conn);
+        connectionCounter++;
+        if (connectionCounter == 2)
+        {
+            isConnected = true;
+            manager.ServerChangeScene("game");
+        }
+    }
 }
