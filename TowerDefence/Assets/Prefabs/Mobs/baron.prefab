@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2331698655715442750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.481, y: 1.989, z: -188.14062}
-  m_LocalScale: {x: 3.6177678, y: 3.6177678, z: 3.6177678}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -147,19 +147,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db249139ab1056448daa2a5bfce5b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarOffset: {x: 0, y: 0}
+  healthBarOffset: {x: 0, y: 1.89}
   animator: {fileID: 8279504978465044155}
   damage: 10
   health: 400
   speed: 1
   mobState: 0
   mobFacingRight: 1
-  attackRange: 0
+  attackRange: 1
   freezeMob: 1
   flipFacing: 0
   killOnAttack: 0
   positionYCorrection: 0
-  fixedBehindMobRange: 1
+  fixedBehindMobRange: 1.5
   allyInFrontWalking: 0
   attackDuration: 0
   deathDuration: 0
