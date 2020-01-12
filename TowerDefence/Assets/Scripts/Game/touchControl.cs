@@ -15,28 +15,39 @@ public class touchControl : NetworkBehaviour
     int mobID;
 
 
+
     void Start()
     {
-        //sprawdzamy czy to odpowiedni gracz
-        if(!isLocalPlayer) 
-        {
-            return;
-        }
-
-        isPicked = false;
-
-        layerMaskRoads = LayerMask.GetMask("Roads");
-        layerMaskCards = LayerMask.GetMask("Cards");
-
-        gameBoard = GameObject.Find("GameBoard");
         scriptsObject = GameObject.Find("ScriptObject");
+
+        //sprawdzamy czy to odpowiedni gracz
+        if (isLocalPlayer)
+        {
+            isPicked = false;
+
+            layerMaskRoads = LayerMask.GetMask("Roads");
+            layerMaskCards = LayerMask.GetMask("Cards");
+
+            gameBoard = GameObject.Find("GameBoard");
+
+            if(!isServer)
+            {
+                CmdSetConnected();
+            }
+        }
     }
 
+
+    [Command]
+    void CmdSetConnected()
+    {
+        scriptsObject.GetComponent<connectionCounter>().hasConnected = true;
+    }
 
     void Update()
     {
         //sprawdzamy czy to odpowiedni gracz
-        if(!isLocalPlayer) 
+        if (!isLocalPlayer)
         {
             return;
         }
@@ -49,29 +60,33 @@ public class touchControl : NetworkBehaviour
         //wciśnięto przycisk myszy
         if (Input.GetMouseButtonDown(0))
         {
-            //sprawdzenie na co kliknięto
-            hit = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMaskCards);
-
-            //jeżeli kliknięto na kartę
-            //zapamiętanie początkowej pozycji (do cofnięcia po nieudanym przeciąganiu)
-            //ustawienie flagi, że zaczęto przeciąganie
-
-            if (hit.collider != null && hit.collider.tag == "Card")
+            //sprawdzamy czy klient już się połączył
+            if (scriptsObject.GetComponent<connectionCounter>().hasConnected)
             {
-                originPos = hit.collider.transform.position;
-                isPicked = true;
-            }
-            //jeżeli kliknięto na reroll oraz wystarczy many na jego użycie
-            //usuwamy karty ze stołu i zmniejszamy ilość many
-            else if (hit.collider != null && hit.collider.tag == "Reroll" &&
-            gameBoard.GetComponent<gameMana>().mana >= gameBoard.GetComponent<gameMana>().rerollCost)
-            {
-                for (int i = 0; i < 4; i++)
+                //sprawdzenie na co kliknięto
+                hit = Physics2D.Raycast(mousePos, Vector2.zero, 10, layerMaskCards);
+
+                //jeżeli kliknięto na kartę
+                //zapamiętanie początkowej pozycji (do cofnięcia po nieudanym przeciąganiu)
+                //ustawienie flagi, że zaczęto przeciąganie
+
+                if (hit.collider != null && hit.collider.tag == "Card")
                 {
-                    Destroy(scriptsObject.GetComponent<cards>().cardsOnBoard[i]);
+                    originPos = hit.collider.transform.position;
+                    isPicked = true;
                 }
+                //jeżeli kliknięto na reroll oraz wystarczy many na jego użycie
+                //usuwamy karty ze stołu i zmniejszamy ilość many
+                else if (hit.collider != null && hit.collider.tag == "Reroll" &&
+                gameBoard.GetComponent<gameMana>().mana >= gameBoard.GetComponent<gameMana>().rerollCost)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Destroy(scriptsObject.GetComponent<cards>().cardsOnBoard[i]);
+                    }
 
-                gameBoard.GetComponent<gameMana>().mana -= gameBoard.GetComponent<gameMana>().rerollCost;
+                    gameBoard.GetComponent<gameMana>().mana -= gameBoard.GetComponent<gameMana>().rerollCost;
+                }
             }
         }
 
@@ -119,7 +134,7 @@ public class touchControl : NetworkBehaviour
                         //bierzemy id moba który zostanie zespawnowany z karty
                         //spawnujemy i niszczymy kartę
                         mobID = hit.collider.gameObject.GetComponent<cardStats>().mobSpawnID;
-                        side = GetComponent<playerScript>().playerSide;                        
+                        side = GetComponent<playerScript>().playerSide;
 
                         //spawnujemy moba
                         GetComponent<spawner>().CmdSpawnMob(side, lane, mobID);
@@ -138,7 +153,7 @@ public class touchControl : NetworkBehaviour
                 {
                     hit.transform.position = originPos;
                 }
-                
+
                 //zakończono przeciąganie
                 isPicked = false;
             }
