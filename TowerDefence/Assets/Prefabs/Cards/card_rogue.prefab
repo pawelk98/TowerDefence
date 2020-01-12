@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5177943822292270834}
   m_Layer: 14
   m_Name: card_rogue
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
