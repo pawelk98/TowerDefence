@@ -386,11 +386,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 541901493}
     m_Modifications:
-    - target: {fileID: 6873868246387751365, guid: 38d240b2f4a79e04c9338a47623a1932,
-        type: 3}
-      propertyPath: m_Name
-      value: MenuButton
-      objectReference: {fileID: 0}
     - target: {fileID: 6873868246387751364, guid: 38d240b2f4a79e04c9338a47623a1932,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -495,6 +490,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873868246387751365, guid: 38d240b2f4a79e04c9338a47623a1932,
+        type: 3}
+      propertyPath: m_Name
+      value: MenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 6873868246387751387, guid: 38d240b2f4a79e04c9338a47623a1932,
         type: 3}
@@ -1062,6 +1062,10 @@ MonoBehaviour:
   - {fileID: 7875980405187854090, guid: 710fc91bc7a80104395e7b47a4007f40, type: 3}
   - {fileID: 1414841499206060941, guid: a9bfeab9baf31f6409c0439d8826c2c8, type: 3}
   - {fileID: 1908764602437796492, guid: 86aaf3019aa7fec43a111ae8a8a5d26e, type: 3}
+  - {fileID: 2462444288525068312, guid: 06c50af08b3ddc04194912c04faefa09, type: 3}
+  - {fileID: 2729097941733559393, guid: e5d7eb06d5fc1a24a988c91dc3e26019, type: 3}
+  - {fileID: 3280789994437411057, guid: 8df13aec3ba894a4099ecf9586966cc7, type: 3}
+  - {fileID: 2162563543230828521, guid: f8b522e11ffebd3438f583f58ff39dfd, type: 3}
   cardsOnBoard:
   - {fileID: 0}
   - {fileID: 0}
