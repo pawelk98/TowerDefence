@@ -14,6 +14,8 @@ public class playerScript : NetworkBehaviour
 
     GameObject leftCastle;
     GameObject rightCastle;
+    public Vector3 posOnScreen = new Vector3(2.13f, -0.32f, 0);
+    public Vector3 posOutOfScreen = new Vector3(1f, 8.98f, 0);
 
     void Start()
     {
@@ -48,30 +50,39 @@ public class playerScript : NetworkBehaviour
             {
                 if (playerSide == Side.left)
                 {
-                 
-                    lose.SetActive(true);
-                  
+                    setEndGameScreen(false);
                 }
                 else
                 {
-                    win.SetActive(true);
-                    
+                    setEndGameScreen(true);
                 }
             }
             else if (rightCastle.GetComponent<castle>().health <= 0)
             {
                 if (playerSide == Side.left)
                 {
-                    win.SetActive(true);
-                    
+                    setEndGameScreen(true);
+
                 }
                 else
                 {
-                    lose.SetActive(true);
-                   
-
+                    setEndGameScreen(false);
                 }
             }
+        }
+    }
+
+    void setEndGameScreen(bool gameWon)
+    {
+        if (gameWon)
+        {
+            win.SetActive(true);
+            win.transform.position = posOnScreen;
+        }
+        else
+        {
+            lose.SetActive(true);
+            lose.transform.position = posOnScreen;
         }
     }
 }

@@ -149,9 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarOffset: {x: -0.21, y: 1.44}
   animator: {fileID: 9220265240250080938}
-  damage: 10
-  health: 50
-  speed: 1
+  damage: 20
+  health: 170
+  speed: 2.5
   mobState: 0
   mobFacingRight: 0
   attackRange: 0.5

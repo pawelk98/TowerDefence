@@ -118,7 +118,7 @@ MonoBehaviour:
   healthBarOffset: {x: -0.4, y: 1.17}
   animator: {fileID: 3918462260472025855}
   damage: 40
-  health: 90
+  health: 100
   speed: 2
   mobState: 0
   mobFacingRight: 1
