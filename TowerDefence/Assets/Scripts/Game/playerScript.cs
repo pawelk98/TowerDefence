@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 
 public class playerScript : NetworkBehaviour
 {
@@ -29,9 +28,7 @@ public class playerScript : NetworkBehaviour
 
             win.SetActive(false);
             lose.SetActive(false);
-           
 
-            
             playerSide = Side.right;
 
             if (isServer)
@@ -44,7 +41,7 @@ public class playerScript : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer && GameManager.isConnected)
+        if (isLocalPlayer)
         {
             //sprawdzenie czy ktoś wygrał
             if (leftCastle.GetComponent<castle>().health <= 0)

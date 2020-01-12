@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 7951333336938881021}
   - component: {fileID: 2927016535694676334}
   - component: {fileID: 1095850753775394063}
+  - component: {fileID: 5731207150565784518}
   m_Layer: 14
   m_Name: MenuPrefabv2
   m_TagString: Untagged
@@ -342,6 +343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e89d82bb1a102419bc7bef52ecca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!210 &5731207150565784518
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815247969961204785}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 150
 --- !u!1 &3158691064827135942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1119,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LeaveRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 6873868247028089702, guid: 38d240b2f4a79e04c9338a47623a1932,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 6873868247028089700, guid: 38d240b2f4a79e04c9338a47623a1932,
         type: 3}
       propertyPath: m_text
@@ -1131,11 +1148,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6873868247028089702, guid: 38d240b2f4a79e04c9338a47623a1932,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d240b2f4a79e04c9338a47623a1932, type: 3}

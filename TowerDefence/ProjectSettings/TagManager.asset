@@ -51,9 +51,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Uder All
-    uniqueID: 1918056191
-    locked: 0
   - name: Background
     uniqueID: 1306654513
     locked: 0
