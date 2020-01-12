@@ -2531,6 +2531,7 @@ GameObject:
   - component: {fileID: 1297477348}
   - component: {fileID: 1297477350}
   - component: {fileID: 1297477351}
+  - component: {fileID: 1297477352}
   m_Layer: 12
   m_Name: GameCastleLeft
   m_TagString: Castles
@@ -2641,6 +2642,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2064771721}
   health: 1000
+--- !u!114 &1297477352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297477347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1432887566
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,6 +3367,7 @@ GameObject:
   - component: {fileID: 1989801347}
   - component: {fileID: 1989801349}
   - component: {fileID: 1989801350}
+  - component: {fileID: 1989801351}
   m_Layer: 11
   m_Name: GameCastleRight
   m_TagString: Castles
@@ -3443,6 +3478,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 661772093}
   health: 1000
+--- !u!114 &1989801351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989801346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &2064771721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 225674892816773728, guid: 12a0062b6fadd164a91996f42f360d87,
