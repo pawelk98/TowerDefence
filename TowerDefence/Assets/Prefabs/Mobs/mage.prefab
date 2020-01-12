@@ -158,7 +158,7 @@ MonoBehaviour:
   freezeMob: 1
   flipFacing: 0
   killOnAttack: 0
-  positionYCorrection: 0
+  positionYCorrection: -0.17
   fixedBehindMobRange: 1
   allyInFrontWalking: 0
   attackDuration: 0
