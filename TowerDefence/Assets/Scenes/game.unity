@@ -966,6 +966,8 @@ GameObject:
   - component: {fileID: 778048393}
   - component: {fileID: 778048392}
   - component: {fileID: 778048394}
+  - component: {fileID: 778048396}
+  - component: {fileID: 778048395}
   m_Layer: 0
   m_Name: ScriptObject
   m_TagString: ScriptsObject
@@ -1067,6 +1069,52 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &778048395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778048391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &778048396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778048391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5324a6335f0ab04e827f9f44419d56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasConnected: 0
 --- !u!1 &797152596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c59a7d8d3b1eb4ab2a2a160b778aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: 5
+  mana: 10
   rerollCost: 1
   time: 3
   crystals:
