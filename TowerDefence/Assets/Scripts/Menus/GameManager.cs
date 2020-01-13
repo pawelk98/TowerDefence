@@ -10,7 +10,6 @@ using System;
 
 public class GameManager : NetworkManager
 {
-
     [SerializeField]
     private uint roomSize = 4;
     //Rzeczy do LobbyMenu
@@ -66,6 +65,16 @@ public class GameManager : NetworkManager
         GameObject.Find("BackToMainMenuButton").GetComponent<Button>().onClick.AddListener(GoBackToMainMenuButton);
         GameObject.Find("CreateRoom").GetComponent<Button>().onClick.AddListener(CreateRoom);
     }
-   
 
+    public void LeaveRoom()
+    {
+        MatchInfo matchInfo = manager.matchInfo;
+        manager.matchMaker.DropConnection(matchInfo.networkId,matchInfo.nodeId,0, manager.OnDropConnection);
+        manager.StopHost();
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        Invoke("LeaveRoom",5f);
+    }
 }
