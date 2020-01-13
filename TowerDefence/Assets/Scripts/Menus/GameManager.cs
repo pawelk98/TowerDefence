@@ -75,6 +75,7 @@ public class GameManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnection conn)
     {
+        base.OnServerDisconnect(conn);
         Invoke("LeaveRoom",5f);
     }
 }
