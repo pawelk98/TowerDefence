@@ -29,7 +29,7 @@ public class mobStats : NetworkBehaviour
     public float deathDuration;
     public float behindMobRange;
 
-    [SyncVar]
+    //[SyncVar]
     public float positionX;
     public float positionY;
     public float realPositionY;
